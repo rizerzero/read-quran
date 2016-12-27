@@ -13,7 +13,7 @@ class SurahTableSeeder extends Seeder
     public function run()
     {
         //
-        \App\Surah::insert($this->allSurah);
+        \App\Module\Quran\Models\Surah::insert($this->allSurah);
     }
 
     private $allSurah = [

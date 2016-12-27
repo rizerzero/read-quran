@@ -12,6 +12,6 @@ class Verse extends Model
 
     public function language()
     {
-        return $this->belongsTo(Language::class, 'DatabaseID', 'ref_id');
+        return $this->belongsTo(Language::class, 'language_id', 'ref_id');
     }
 }

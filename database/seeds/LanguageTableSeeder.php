@@ -45,6 +45,6 @@ class LanguageTableSeeder extends Seeder
     public function run()
     {
         //
-      \App\Language::insert($this->languages);
+        \App\Module\Quran\Models\Language::insert($this->languages);
     }
 }

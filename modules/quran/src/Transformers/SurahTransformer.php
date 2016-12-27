@@ -20,7 +20,7 @@ class SurahTransformer extends TransformerAbstract
     {
         return [
             'id' => $surah->id,
-            'name' => $surah->name,
+            'name' =>  $surah->name,
             'english_title' => $surah->english_title
         ];
 
@@ -29,7 +29,7 @@ class SurahTransformer extends TransformerAbstract
     public function includeVerses(Surah $surah)
     {
 //        dd($surah->verses->groupBy('VersesID'));
-        $verses = $surah->verses->groupBy('VerseID');
+        $verses = $surah->verses->groupBy('verse_id');
         return ($this->collection($verses, new VerseTransformer()));
     }
 }

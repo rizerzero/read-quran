@@ -19,6 +19,8 @@ require('bootstrap-sass');
 window.Vue = require('vue');
 require('vue-resource');
 
+var VueFilter = require('vue-filter');
+Vue.use(VueFilter);
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
  * the outgoing requests issued by this application. The CSRF middleware

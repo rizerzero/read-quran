@@ -12,6 +12,6 @@ class Surah extends Model
 
     public function verses()
     {
-        return $this->hasMany(Verse::class,'SuraID', 'id');
+        return $this->hasMany(Verse::class,'surah_id', 'id');
     }
 }

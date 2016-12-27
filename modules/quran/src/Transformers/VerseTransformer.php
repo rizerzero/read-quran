@@ -19,15 +19,15 @@ class VerseTransformer extends TransformerAbstract
         $result = null;
         $verseId = 0;
         foreach ($verses as $verse) {
-            if (!isset($result[$verse->VerseID])) {
-                $verseId = $verse->VerseID;
+            if (!isset($result[$verse->verse_id])) {
+                $verseId = $verse->verse_id;
                 $result[$verseId] = [];
             }
             $lang = $verse->language?$verse->language->code: $verse->DatabaseID;
-            $result[$verse->VerseID] = array_merge(
-                $result[$verse->VerseID],
+            $result[$verse->verse_id] = array_merge(
+                $result[$verse->verse_id],
                 [
-                    $lang => $verse->AyahText
+                    $lang => $verse->ayah
                 ]
             );
         }

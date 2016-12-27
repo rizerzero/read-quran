@@ -1,48 +1,115 @@
 <template>
     <div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Select Surah</label>
+                <multiselect v-model="selectedSurah"
+                             deselect-label="Can't remove this value"
+                             track-by="name" label="name"
+                             placeholder="Select one"
+                             :options="surahList"
+                             :searchable="false"
+                             @select="fetchSurah"
+                             :allow-empty="false">
+                </multiselect>
+            </div>
+            <div class="col-md-5">
+                <label>Select Language</label>
+                <multiselect v-model="selectedLang"
+                             :options="langOptions"
+                             :multiple="true"
+                             :close-on-select="false"
+                             :hide-selected="true"
+                             placeholder="Pick some"
+                             label="name"
+                             :max="3"
+                             track-by="name">
+                </multiselect>
+            </div>
+            <div class="col-md-3">
+                <label></label>
+                <div class="checkbox">
+                    <label>
+                        <input v-model="hideEn" type="checkbox"> Hide English
 
-        <select v-model="selectedId" @change="fetchSurah">
-            <option v-for="sr in surahList" :value="sr.id">{{sr.name}}</option>
-        </select>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+
         <div v-if="surah">
+            <div class="surah text-center">
+                <h1 class="surah-title text-success">{{surah.name}}</h1>
+                <h3 class="surah-title-en">{{surah.english_title}}</h3>
 
-            <h1>{{surah.name}}</h1>
-            <ayah v-for="(verse, index) in surah.verses.data" :verse-id="index+1" :content= "verse"></ayah>
+            </div>
 
+            <ayah v-for="(verse, index) in surah.verses.data" :verse-id="index+1" :content= "verse" :lang="translatedTo"></ayah>
         </div>
     </div>
 </template>
 <script>
     import Ayah from './Ayah.vue'
+    import Multiselect from 'vue-multiselect'
 
     export default {
         mounted: function() {
             this.fetchSurahList();
             this.fetchSurah();
+            this.fetchLaguages();
         },
         data: function() {
             return {
                 surahList: [],
-                selectedId: 1,
-                surah: null
+                surah: null,
+                selectedLang: [],
+                langOptions: [],
+                selectedSurah: {id: 1, name: "001. Al-Fatihah"},
+                hideEn: false
             };
         },
         methods : {
             fetchSurahList: function () {
                 this.$http.get('/surah/all').then(response => {
                     console.log(response);
-                    this.surahList = response.body;
+                    let allSurah = response.body;
+                    this.surahList = allSurah.map((item)=>{
+                                item.name = ("00" + item.id).slice(-3)+'. '+ item.name;
+                                return item;
+                            });
                 })
             },
-            fetchSurah: function() {
-                this.$http.get('/surah/'+ this.selectedId).then(response => {
+            fetchSurah: function(selectedValue = null) {
+                if(! selectedValue) {
+                    selectedValue = this.selectedSurah;
+                }
+
+                this.$http.get('/surah/'+ selectedValue.id).then(response => {
                     console.log(response);
-                this.surah = response.body.data;
+                    this.surah = response.body.data;
+                })
+            },
+            fetchLaguages: function() {
+                this.$http.get('/language/').then(response => {
+                    console.log(response);
+                    this.langOptions = response.body.data;
                 })
             }
         },
+        computed: {
+          translatedTo: function() {
+              let langs = this.selectedLang.map((item)=>item.code)
+              if(! this.hideEn) {
+                  langs.unshift('en')
+              }
+              return langs;
+          }
+        },
         components: {
-            Ayah
+            Ayah,
+            Multiselect
         }
     }
 </script>
