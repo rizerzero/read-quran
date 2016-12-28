@@ -5,7 +5,8 @@
                 <label>Select Surah</label>
                 <multiselect v-model="selectedSurah"
                              deselect-label="Can't remove this value"
-                             track-by="name" label="name"
+                             track-by="name"
+                             label="name"
                              placeholder="Select one"
                              :options="surahList"
                              :searchable="false"
@@ -17,13 +18,10 @@
                 <label>Select Language</label>
                 <multiselect v-model="selectedLang"
                              :options="langOptions"
-                             :multiple="true"
-                             :close-on-select="false"
-                             :hide-selected="true"
                              placeholder="Pick some"
+                             track-by="name"
                              label="name"
-                             :max="3"
-                             track-by="name">
+                             :searchable="true">
                 </multiselect>
             </div>
             <div class="col-md-3">
@@ -46,7 +44,11 @@
 
             </div>
 
-            <ayah v-for="(verse, index) in surah.verses.data" :verse-id="index+1" :content= "verse" :lang="translatedTo"></ayah>
+            <ayah v-for="(verse, index) in surah.verses.data"
+                  :surah-id="surah.id"
+                  :verse-id="index+1"
+                  :content= "verse"
+                  :lang="translatedTo"></ayah>
         </div>
     </div>
 </template>
@@ -64,7 +66,7 @@
             return {
                 surahList: [],
                 surah: null,
-                selectedLang: [],
+                selectedLang: null,
                 langOptions: [],
                 selectedSurah: {id: 1, name: "001. Al-Fatihah"},
                 hideEn: false
@@ -100,7 +102,10 @@
         },
         computed: {
           translatedTo: function() {
-              let langs = this.selectedLang.map((item)=>item.code)
+              let langs =[];
+              if(this.selectedLang) {
+                  langs.push(this.selectedLang.code);
+              }
               if(! this.hideEn) {
                   langs.unshift('en')
               }
