@@ -15,3 +15,4 @@ Route::get('surah', 'SurahController@index');
 Route::get('surah/all', 'SurahController@all');
 Route::get('surah/{id}', 'SurahController@show');
 Route::get('language', 'LanguageController@index');
+Route::get('pdf/{file}', 'QuranController@index');

@@ -49,6 +49,23 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                Quran <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ url('/surah') }}">Translation </a>
+
+                                </li>
+                                <li>
+                                    <a href="{{ url('/pdf/Al-Quran') }}">PDF</a>
+                                    <a href="{{ url('/pdf/dailyrecitations') }}">Daily Recitation</a>
+
+                                </li>
+                            </ul>
+                        </li>
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
