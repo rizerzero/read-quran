@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-md-10">
                 <h2 class="translation-ar"   v-if="hasValue(verseId, 'ar')">
-                    <span class="verse-no">{{verseId}}.</span> {{content[verseId].ar}}
+                    <span class="verse-no pull-left">{{verseId}}.</span>{{content[verseId].ar}}
 
                 </h2>
             </div>
             <div class="col-md-2">
-                <audio :src="audioUrl" controls="controls"></audio>
+                <audio class="pull-right" :src="audioUrl" controls="controls"  v-if="hasValue(verseId, 'ar')"></audio>
             </div>
             <div class="col-md-12">
             <h3 class="translation" v-for="code in lang" v-if="hasValue(verseId, code)">{{content[verseId][code]}}</h3>
@@ -59,6 +59,7 @@
         font-size: 25px;
         margin-top: 10px;
         margin-bottom: 10px;
+        text-align: right;
 
     }
     audio{
