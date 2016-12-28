@@ -32,14 +32,14 @@
         computed: {
             audioUrl: function() {
                 let file = ('00' + this.surahId).slice(-3) +('00' + this.verseId).slice(-3) + '.mp3';
-                let url = '/quran/audio/abdur-rahmaan-as-sudais/verse-by-verse/' + file;
+                let url = '/quran/audio/abdur-rahmaan-as-sudais/by-verse/' + file;
                 return url;
             }
         }
     }
 </script>
 
-<style>
+<style scoped>
     .verse{
         border-top:2px solid #e3e3e3;
     }

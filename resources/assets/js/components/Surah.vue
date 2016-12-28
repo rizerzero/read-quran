@@ -14,7 +14,7 @@
                              :allow-empty="false">
                 </multiselect>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <label>Select Language</label>
                 <multiselect v-model="selectedLang"
                              :options="langOptions"
@@ -24,24 +24,19 @@
                              :searchable="true">
                 </multiselect>
             </div>
-            <div class="col-md-3">
-                <label></label>
+            <div class="col-md-4">
                 <div class="checkbox">
                     <label>
-                        <input v-model="hideEn" type="checkbox"> Hide English
-
+                        <input v-model="hideEn" type="checkbox"> <strong>Hide English</strong>
                     </label>
                 </div>
-
+                <audio :src="audioUrl" controls="controls"></audio>
             </div>
         </div>
-
-
         <div v-if="surah">
             <div class="surah text-center">
                 <h1 class="surah-title text-success">{{surah.name}}</h1>
                 <h3 class="surah-title-en">{{surah.english_title}}</h3>
-
             </div>
 
             <ayah v-for="(verse, index) in surah.verses.data"
@@ -110,6 +105,12 @@
                   langs.unshift('en')
               }
               return langs;
+          },
+          audioUrl: function() {
+              let file = ('00'+this.selectedSurah.id).slice(-3) + '.mp3';
+              let url = '/quran/audio/abdur-rahmaan-as-sudais/by-surah/' +file;
+
+              return url;
           }
         },
         components: {
