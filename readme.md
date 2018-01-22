@@ -1,27 +1,38 @@
-# Laravel PHP Framework
+### Features
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+The following features will be implemented In-Sha-Allah.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+- [Listen & Read Al-Quran](#listen-and-read-al-quran)
+- [Prayers](#prayers)
+- [99 Names of Allah](#99-names-of-allah)
+- [New Muslim History(Blog)](#new-muslim-history)
+- [Islamic Lifestyle](#islamic-lifestyle)
+- [Hadith](#hadith)
+- [Learn How to Read Quran](#learn-how-to-read-quran)
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+#### Listen and Read Al-Quran
+    There wil be options to listen a entire surah and verse by verse(ayah). Show every verse(ayah) of surah in arabic with translation of user's preferred language.
+#### Prayers
+    This section contains all basic dua, frequently recited surah, tashaud etc.
 
-## Official Documentation
+### 99 Names of Allah
+    This section contains 99 names of Allah with english translation.
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+### New Muslim History 
+    This section contains the reason/inspiration to be a muslim of ex-non-muslim person. Actually the history to accept islam as a religion.
 
-## Contributing
+### Islamic Lifestyle
+    This section contains the rules and dua of daily activities e.g how to udhu, ghusl etc.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+### Hadith
+    This section contains the hadith those need to be obeyed in daily life
 
-## Security Vulnerabilities
+### Learn How to Read Quran
+    This section contains the links of video tutorials to read quran correctly.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Resources
+    - [Quran database(SQL)](https://drive.google.com/open?id=0ByMz_dA4k2nkay00U3kzUzhhT0U)
+    - [Everyayah](http://everyayah.com)
+    - [YaQuran](http://www.yaquran.com/index.html)
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+> You are most welcome to contribute in this project or You have any suggestion email me to [mahbub.rucse@gmail.com](mailto:mahbub.rucse@gmail.com). 
