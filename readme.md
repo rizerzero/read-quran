@@ -34,5 +34,6 @@ This section contains the links of video tutorials to read quran correctly.
 - [Quran database(SQL)](https://drive.google.com/open?id=0ByMz_dA4k2nkay00U3kzUzhhT0U)
 - [Everyayah](http://everyayah.com)
 - [YaQuran](http://www.yaquran.com/index.html)
+- [The Religion of Islam](https://www.islamreligion.com/)
 
 > You are most welcome to contribute in this project or You have any suggestion email me to [mahbub.rucse@gmail.com](mailto:mahbub.rucse@gmail.com). 
