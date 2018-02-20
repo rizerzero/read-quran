@@ -22,7 +22,7 @@
         props:['surahId','verseId', 'content', 'lang'],
         methods: {
             hasValue: function(verseId, langCode) {
-                if(this.content[verseId] && this.content[verseId][langCode]) {
+                if (this.content[verseId] && this.content[verseId][langCode]) {
                     return true;
                 }
 
@@ -31,9 +31,10 @@
         },
         computed: {
             audioUrl: function() {
-               if(this.content[verseId] && this.content[verseId]['audio_url']) {
-                    return  this.content[verseId]['audio_url'];
+               if (this.content[this.verseId] && this.content[this.verseId]['audio_url']) {
+                    return  this.content[this.verseId]['audio_url'];
                 }
+                return '';
             }
         }
     }

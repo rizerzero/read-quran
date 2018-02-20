@@ -30,7 +30,7 @@
                         <input v-model="hideEn" type="checkbox"> <strong>Hide English</strong>
                     </label>
                 </div>
-                <audio :src="surah.audio_url" controls="controls"></audio>
+                <audio :src="audioUrl" controls="controls"></audio>
             </div>
         </div>
         <div v-if="surah">
@@ -107,10 +107,11 @@
               return langs;
           },
           audioUrl: function() {
-              let file = ('00'+this.selectedSurah.id).slice(-3) + '.mp3';
-              let url = '/quran/audio/abdur-rahmaan-as-sudais/by-surah/' +file;
-
-              return url;
+             if (this.surah && this.surah.audio_url)
+             {
+                 return this.surah.audio_url;
+             }
+              return '';
           }
         },
         components: {
