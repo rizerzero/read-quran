@@ -43,6 +43,9 @@ class ModuleProvider extends ServiceProvider
         //Load helpers
         $this->loadHelpers();
 
+        //Load Config
+        $this->loadConfig();
+        //
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(BootstrapModuleServiceProvider::class);
@@ -53,6 +56,15 @@ class ModuleProvider extends ServiceProvider
         $helpers = $this->app['files']->glob(__DIR__ . '/../../helpers/*.php');
         foreach ($helpers as $helper) {
             require_once $helper;
+        }
+    }
+
+    public function loadConfig()
+    {
+        $configs = split_files_with_basename($this->app['files']->glob(__DIR__ . '/../../config/*.php'));
+
+        foreach ($configs as $key => $row) {
+            $this->mergeConfigFrom($row, $key);
         }
     }
 }

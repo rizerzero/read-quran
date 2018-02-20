@@ -30,7 +30,7 @@
                         <input v-model="hideEn" type="checkbox"> <strong>Hide English</strong>
                     </label>
                 </div>
-                <audio :src="audioUrl" controls="controls"></audio>
+                <audio :src="surah.audio_url" controls="controls"></audio>
             </div>
         </div>
         <div v-if="surah">

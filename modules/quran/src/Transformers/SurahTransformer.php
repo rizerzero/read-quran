@@ -21,7 +21,8 @@ class SurahTransformer extends TransformerAbstract
         return [
             'id' => $surah->id,
             'name' =>  $surah->name,
-            'english_title' => $surah->english_title
+            'english_title' => $surah->english_title,
+            'audio_url' => $surah->audio_url,
         ];
 
     }

@@ -21,7 +21,9 @@ class VerseTransformer extends TransformerAbstract
         foreach ($verses as $verse) {
             if (!isset($result[$verse->verse_id])) {
                 $verseId = $verse->verse_id;
-                $result[$verseId] = [];
+                $result[$verseId] = [
+                    'audio_url' => $verse->audio_url
+                ];
             }
             $lang = $verse->language?$verse->language->code: $verse->DatabaseID;
             $result[$verse->verse_id] = array_merge(
@@ -31,6 +33,7 @@ class VerseTransformer extends TransformerAbstract
                 ]
             );
         }
+
         return $result;
     }
     
