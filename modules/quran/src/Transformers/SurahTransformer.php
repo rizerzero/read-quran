@@ -31,6 +31,7 @@ class SurahTransformer extends TransformerAbstract
     {
 //        dd($surah->verses->groupBy('VersesID'));
         $verses = $surah->verses->groupBy('verse_id');
-        return ($this->collection($verses, new VerseTransformer()));
+        $verses = $this->collection($verses, new VerseTransformer());
+        return $verses;
     }
 }
