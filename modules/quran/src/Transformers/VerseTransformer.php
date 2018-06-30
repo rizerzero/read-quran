@@ -36,7 +36,7 @@ class VerseTransformer extends TransformerAbstract
                 ]
             );
         }
-
+        
         return $result[$verseId];
     }
     

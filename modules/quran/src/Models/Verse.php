@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Verse extends Model
 {
-    protected $table = 'Quran';
+    protected $table = 'quran';
 
     protected $primaryKey = 'id';
 

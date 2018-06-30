@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use App\Module\Quran\Models\Surah;
 use App\Module\Quran\Models\Verse;
 use App\Module\Quran\Transformers\SurahTransformer;
+use Illuminate\Http\Request;
+use App\Module\Quran\Models\Language;
 
 class SurahController extends Controller
 {
@@ -20,19 +22,33 @@ class SurahController extends Controller
         return $allSurah;
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $surah = Surah::with(['verses', 'verses.language'])->find($id);
-//        return $surah->verses->groupBy('verse_id');
+        $languages = (array) $request->get('language');
+        $languages[] = 'ar';
+        $languages[] = 'en';
+        
+        $languageIds = Language::whereIn('code', $languages)->pluck('ref_id')->all();
 
-        $respose = transform_response($surah, new SurahTransformer())
+        $surah = Surah::with([
+                'verses' => function($query) use($languageIds) {
+                    $query->whereIn('language_id', $languageIds);
+                }, 
+                'verses.language'
+            ])
+            ->find($id);
+
+        $response = transform_response($surah, new SurahTransformer())
             ->toArray();
-        // dd($respose);
-            // dd()
+        
+        if (isset($response['data']['verses']['data'])){
+            $response['data']['verses']['data'] = array_filter($response['data']['verses']['data'], function($item) {
+                return isset($item['ar']);
+            });
+        }
 
-        $respose = collect($respose);
-        return $respose;
+        $response = collect($response);
 
-
+        return $response;
     }
 }
