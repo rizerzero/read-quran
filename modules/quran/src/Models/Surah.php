@@ -10,9 +10,9 @@ class Surah extends Model
 
     protected $fillable = [];
 
-    public function verses()
+    public function ayahs()
     {
-        return $this->hasMany(Verse::class,'surah_id', 'id');
+        return $this->hasMany(Ayah::class,'surah_id', 'id');
     }
 
     public function getIdLabelAttribute(Type $var = null)

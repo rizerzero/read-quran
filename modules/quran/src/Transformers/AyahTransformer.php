@@ -9,23 +9,24 @@
 namespace App\Module\Quran\Transformers;
 
 
-use App\Module\Quran\Models\Verse;
+use App\Module\Quran\Models\Ayah;
 use League\Fractal\TransformerAbstract;
 
-class VerseTransformer extends TransformerAbstract
+class AyahTransformer extends TransformerAbstract
 {
-    public function transform($verses)
+    public function transform($ayahs)
     {
         $result = null;
         $verseId = 0;
 
-        // dd($verses);
-        foreach ($verses as $verse) {
+        // dd($ayahs);
+        foreach ($ayahs as $verse) {
             if (!isset($result[$verse->verse_id])) {
                 $verseId = $verse->verse_id;
                 $result[$verseId] = [
                     'audio_url' => $verse->audio_url,
-                    'verse_id' => ($verseId)
+                    'verse_id' => ($verseId),
+                    'tags' => $verse->tags->pluck('name')->all(),
                 ];
             }
             $lang = $verse->language ? $verse->language->code : $verse->verse_id;

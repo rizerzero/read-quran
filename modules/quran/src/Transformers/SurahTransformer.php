@@ -29,8 +29,8 @@ class SurahTransformer extends TransformerAbstract
 
     public function includeVerses(Surah $surah)
     {
-        $verses = $surah->verses->groupBy('verse_id');
-        $verses = $this->collection($verses, new VerseTransformer());
-        return $verses;
+        $ayahs = $surah->ayahs->groupBy('verse_id');
+        $ayahs = $this->collection($ayahs, new AyahTransformer());
+        return $ayahs;
     }
 }
