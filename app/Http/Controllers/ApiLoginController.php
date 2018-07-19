@@ -70,8 +70,8 @@ class ApiLoginController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:6',
-            'password_confirmtion' => 'required|confirmed'
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required'
         ]);
     }
 }
