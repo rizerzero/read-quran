@@ -1,6 +1,7 @@
 <?php namespace App\Module\Quran\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Ayah extends Model
 {
@@ -8,7 +9,9 @@ class Ayah extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = [];
+    protected $fillable = ['language_id', 'language_code', 'surah_id', 'verse_id', 'ayah'];
+
+    public $timestamps = false;
 
     public function language()
     {
@@ -32,12 +35,32 @@ class Ayah extends Model
 
     public function tags($surahId = null)
     {
-        $rel =  $this->belongsToMany(Tag::class, 'ayah_tag', 'verse_id', 'tag_id', 'verse_id');
+        $rel = $this->belongsToMany(Tag::class, 'ayah_tag', 'verse_id', 'tag_id', 'verse_id');
             
         if ($surahId) {
-            $rel = $rel->wherePivot('surah_id', $surahId);
+            $rel = $rel->wherePivot('chapter_id', $surahId);
         };
 
         return $rel;
+    }
+
+    public function getMetaDataAttribute() 
+    {
+        $this->loadMissing('surah');
+
+        return ($this->surah->name ?? '') . " [$this->surah_id:$this->verse_id]";
+    }
+
+    public function getIsFavoriteAttribute()
+    {
+        $this->loadMissing('favoritedBy');
+
+        return $this->favoritedBy->contains('id', \Auth::id());
+    }
+
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'verse_id', 'created_by', 'verse_id')
+            ->whereNull('favorites.deleted_at');
     }
 }

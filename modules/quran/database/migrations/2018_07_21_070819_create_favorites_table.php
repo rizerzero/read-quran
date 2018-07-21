@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAyahTagTable extends Migration
+class CreateFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateAyahTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('ayah_tag', function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('favoritable_type');
             $table->integer('chapter_id');
-            $table->integer('verse_id');
-            $table->integer('tag_id');
+            $table->integer('verse_id')->nullable();
+            $table->integer('created_by');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateAyahTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ayah_tag');
+        Schema::dropIfExists('favorites');
     }
 }

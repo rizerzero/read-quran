@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::get('surah', 'SurahController@index');
 Route::get('surah/all', 'SurahController@all');
 Route::get('surah/{surah}', 'SurahController@show');
@@ -19,3 +20,5 @@ Route::get('language', 'LanguageController@index');
 Route::get('pdf/{file}', 'QuranController@index');
 Route::get('tag/surah/{surah}/ayah/{ayah}', 'TagController@add');
 Route::get('tag-remove/surah/{surah}/ayah/{ayah}', 'TagController@remove');
+Route::get('favorites', 'FavoriteController@index');
+Route::post('favorites', 'FavoriteController@store')->middleware('auth:api');

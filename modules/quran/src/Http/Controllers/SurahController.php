@@ -7,14 +7,15 @@ use App\Module\Quran\Transformers\SurahTransformer;
 use Illuminate\Http\Request;
 use App\Module\Quran\Models\Language;
 
-class SurahController extends Controller
+class SurahController extends ApiBaseController
 {
     protected $module = 'quran';
 
     public function index()
     {
-        return view('surah.show');
+        return $this->all();
     }
+
     public function all()
     {
         $allSurah = Surah::get(['id', 'name']);
@@ -23,20 +24,18 @@ class SurahController extends Controller
     }
 
     public function show($id, Request $request)
-    {
-        $languages = (array) $request->get('language');
-        $languages[] = 'ar';
-        $languages[] = 'en';
+    {        
+        $languages = $this->getLanguageCodes();
         
-        $languageIds = Language::whereIn('code', $languages)->pluck('ref_id')->all();
-
         $surah = Surah::with([
-                'ayahs' => function($query) use($languageIds) {
-                    $query->whereIn('language_id', $languageIds);
+                'ayahs' => function($query) use($languages) {
+                    $query->whereIn('language_code', $languages);
                 }, 
-                'ayahs.language',
                 'ayahs.tags'  => function($query) use($id) {
-                    $query->wherePivot('surah_id', $id);
+                    $query->wherePivot('chapter_id', $id);
+                }, 
+                'ayahs.favoritedBy'  => function($query) use($id) {
+                    $query->wherePivot('chapter_id', $id);
                 }, 
             ])
             ->find($id);
@@ -44,13 +43,11 @@ class SurahController extends Controller
         $response = transform_response($surah, new SurahTransformer())
             ->toArray();
         
-        if (isset($response['data']['ayahs']['data'])){
+        if (isset($response['data']['ayahs']['data'])) {
             $response['data']['ayahs']['data'] = array_filter($response['data']['ayahs']['data'], function($item) {
                 return isset($item['ar']);
             });
         }
-
-        $response = collect($response);
 
         return $response;
     }

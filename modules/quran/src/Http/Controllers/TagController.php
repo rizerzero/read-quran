@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use App\Module\Quran\Models\Tag;
 use App\Http\Controllers\Controller;
 
-class TagController extends Controller
+class TagController extends ApiBaseController
 {
     protected $module = 'quran';
 

@@ -5,7 +5,7 @@ use App\Module\Quran\Transformers\LanguageTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class LanguageController extends Controller
+class LanguageController extends ApiBaseController
 {
     protected $module = 'quran';
 
@@ -19,7 +19,7 @@ class LanguageController extends Controller
     public function index()
     {
         //
-        $AllLanguages = Language::whereNotIn('ref_id',[1, 103])
+        $AllLanguages = Language::whereNotIn('code', ['ar', 'en'])
             ->orderBy('name')
             ->get();
 
