@@ -18,7 +18,7 @@ class TagController extends ApiBaseController
 
         $tag->ayahs($surahId)->syncWithoutDetaching([
             $verseId => [
-                'surah_id' => $surahId
+                'chapter_id' => $surahId
             ]
         ]);
 

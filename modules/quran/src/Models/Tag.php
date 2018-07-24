@@ -13,10 +13,10 @@ class Tag extends Model
     public function ayahs($surahId = null)
     {
         $rel = $this->belongsToMany(Ayah::class, 'ayah_tag', 'tag_id', 'verse_id', null, 'verse_id')
-        ->whereRaw('ayah_tag.surah_id = quran.surah_id');
+        ->whereRaw('ayah_tag.chapter_id = quran.surah_id');
         
         if ($surahId) {
-            $rel = $rel->wherePivot('surah_id', $surahId);
+            $rel = $rel->wherePivot('chapter_id', $surahId);
         };
 
         return $rel;
